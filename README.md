@@ -1,28 +1,15 @@
-# Cap::Table
-Short description and motivation.
+# Capitalization Table Management Rails Engine
 
-## Usage
-How to use my plugin.
+This engine serves a few basic use cases for capitalization table management:
+- Issuing Series of Fundings
+- Simulating Investor Rounds
+- Managing the list of subscribed investors
 
-## Installation
-Add this line to your application's Gemfile:
+## Source:
+https://en.wikipedia.org/wiki/Pre-money_valuation
+https://www.investopedia.com/terms/c/capitalization-table.asp
+https://www.investopedia.com/ask/answers/difference-between-premoney-and-postmoney/
 
 ```ruby
 gem 'cap-table'
 ```
-
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install cap-table
-```
-
-## Contributing
-Contribution directions go here.
-
-## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
