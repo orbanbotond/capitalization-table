@@ -39,4 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry-nav'
   spec.add_development_dependency 'mongoid-rspec'
   spec.add_development_dependency 'database_cleaner-mongoid'
+  spec.add_development_dependency 'rails-controller-testing'
 end

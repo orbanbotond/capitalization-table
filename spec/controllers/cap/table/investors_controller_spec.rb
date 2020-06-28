@@ -31,8 +31,14 @@ module Cap::Table
 
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      user = User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
-      sign_in user
+      @user = User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+      sign_in @user
+      @user_2 = User.create email: 'bb@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+    end
+
+    after(:each) do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_out @user
     end
 
     # This should return the minimal set of attributes required to create a valid
@@ -42,7 +48,8 @@ module Cap::Table
       {
         name: "Logic Optimum",
         amount: "10000000",
-        willing_to_reinvest: true
+        willing_to_reinvest: true,
+        user_id: @user.id.to_s
       }
     }
 
@@ -60,9 +67,12 @@ module Cap::Table
 
     describe "GET #index" do
       it "returns a success response" do
-        Investor.create! valid_attributes
+        investor = Investor.create! valid_attributes
+        investor_for_other_user = Investor.create! valid_attributes.merge(name: 'another_investor', user: @user_2)
         get :index, params: {}, session: valid_session
         expect(response).to be_successful
+        expect(assigns(:investors).all.to_a).to include(investor)
+        expect(assigns(:investors).all.to_a).to_not include(investor_for_other_user)
       end
     end
 
@@ -95,6 +105,7 @@ module Cap::Table
           expect {
             post :create, params: {investor: valid_attributes}, session: valid_session
           }.to change(Investor, :count).by(1)
+          expect(Investor.last.user).to eq(@user)
         end
 
         it "redirects to the created investor" do

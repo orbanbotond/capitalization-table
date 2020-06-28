@@ -3,6 +3,7 @@ require_dependency "cap/table/application_controller"
 module Cap::Table
   class InvestorsController < ApplicationController
     before_action :authenticate_user!
+    around_action :set_tenant
     before_action :set_investor, only: [:show, :edit, :update, :destroy, :negotiate, :invest, :re_invest]
 
     # GET /investors
@@ -41,8 +42,6 @@ module Cap::Table
       redirect_to investors_path, notice: 'Investor was put in re_invest state.'
     end
 
-
-
     # POST /investors
     def create
       @investor = ::Cap::Table::Investor.new(investor_params)
@@ -73,6 +72,12 @@ module Cap::Table
       # Use callbacks to share common setup or constraints between actions.
       def set_investor
         @investor = ::Cap::Table::Investor.find(params[:id])
+      end
+
+      def set_tenant
+        Mongoid::Multitenancy.with_tenant(current_user) do
+          yield
+        end
       end
 
       # Only allow a trusted parameter "white list" through.

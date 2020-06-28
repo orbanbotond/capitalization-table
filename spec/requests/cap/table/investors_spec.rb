@@ -26,7 +26,8 @@ module Cap::Table
       {
           name: "Logic Optimum",
           amount: "10000000",
-          willing_to_reinvest: true
+          willing_to_reinvest: true,
+          user: user
       }
     }
 
@@ -37,9 +38,13 @@ module Cap::Table
       }
     }
 
+    let(:user){
+      User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+    }
+
     describe "GET /index" do
       it "renders a successful response" do
-        sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+        sign_in user
         Investor.create! valid_attributes
         get investors_url
         expect(response).to be_successful
@@ -48,7 +53,7 @@ module Cap::Table
 
     describe "GET /show" do
       it "renders a successful response" do
-        sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+        sign_in user
         investor = Investor.create! valid_attributes
         get investor_url(investor)
         expect(response).to be_successful
@@ -57,7 +62,7 @@ module Cap::Table
 
     describe "GET /new" do
       it "renders a successful response" do
-        sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+        sign_in user
         get new_investor_url
         expect(response).to be_successful
       end
@@ -65,7 +70,7 @@ module Cap::Table
 
     describe "GET /edit" do
       it "render a successful response" do
-        sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+        sign_in user
         investor = Investor.create! valid_attributes
         get edit_investor_url(investor)
         expect(response).to be_successful
@@ -75,14 +80,14 @@ module Cap::Table
     describe "POST /create" do
       context "with valid parameters" do
         it "creates a new Investor" do
-          sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+          sign_in user
           expect {
             post investors_url, params: { investor: valid_attributes }
           }.to change(Investor, :count).by(1)
         end
 
         it "redirects to the created investor" do
-          sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+          sign_in user
           post investors_url, params: { investor: valid_attributes }
           expect(response).to redirect_to(investor_url(Investor.last))
         end
@@ -90,14 +95,14 @@ module Cap::Table
 
       context "with invalid parameters" do
         it "does not create a new Investor" do
-          sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+          sign_in user
           expect {
             post investors_url, params: { investor: invalid_attributes }
           }.to change(Investor, :count).by(0)
         end
 
         it "renders a successful response (i.e. to display the 'new' template)" do
-          sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+          sign_in user
           post investors_url, params: { investor: invalid_attributes }
           expect(response).to be_successful
         end
@@ -111,7 +116,7 @@ module Cap::Table
         }
 
         it "updates the requested investor" do
-          sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+          sign_in user
           investor = Investor.create! valid_attributes
           patch investor_url(investor), params: { investor: new_attributes }
           investor.reload
@@ -119,7 +124,7 @@ module Cap::Table
         end
 
         it "redirects to the investor" do
-          sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+          sign_in user
           investor = Investor.create! valid_attributes
           patch investor_url(investor), params: { investor: new_attributes }
           investor.reload
@@ -129,7 +134,7 @@ module Cap::Table
 
       context "with invalid parameters" do
         it "renders a successful response (i.e. to display the 'edit' template)" do
-          sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+          sign_in user
           investor = Investor.create! valid_attributes
           patch investor_url(investor), params: { investor: invalid_attributes }
           expect(response).to be_successful
@@ -139,7 +144,7 @@ module Cap::Table
 
     describe "DELETE /destroy" do
       it "destroys the requested investor" do
-        sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+        sign_in user
         investor = Investor.create! valid_attributes
         expect {
           delete investor_url(investor)
@@ -147,7 +152,7 @@ module Cap::Table
       end
 
       it "redirects to the investors list" do
-        sign_in User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+        sign_in user
         investor = Investor.create! valid_attributes
         delete investor_url(investor)
         expect(response).to redirect_to(investors_url)

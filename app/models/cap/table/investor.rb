@@ -2,6 +2,7 @@ module Cap::Table
   class Investor
     include Mongoid::Document
     include Mongoid::Timestamps
+    include Mongoid::Multitenancy::Document
     include ::AASM
 
     field :name, type: String
@@ -13,6 +14,8 @@ module Cap::Table
                       uniqueness: true
     validates :amount, presence: true,
                        numericality: true
+
+    tenant(:user)
 
     aasm  column: :negotiation_state do
       state :newly_added, initial: true
