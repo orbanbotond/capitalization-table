@@ -1,0 +1,21 @@
+p#notice
+  = notice
+p
+  strong
+    | Name:
+  = @investor.name
+p
+  strong
+    | Amount:
+  = @investor.amount
+p
+  strong
+    | Willing to reinvest:
+  = @investor.willing_to_reinvest
+p
+  strong
+    | Negotiation state:
+  = @investor.negotiation_state
+= link_to 'Edit', edit_investor_path(@investor)
+|  | 
+= link_to 'Back', investors_path
