@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bootstrap', '~> 4.5.0'
   spec.add_dependency 'slim'
   spec.add_dependency "mongoid-multitenancy-2"
+  spec.add_development_dependency 'rspec', '~> 3.9'
 end
