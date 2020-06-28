@@ -8,9 +8,9 @@ module Cap
                                  fixtures: true,
                                  view_specs: true,
                                  helper_specs: false,
-                                 routing_specs: true,
-                                 controller_specs: true,
-                                 request_specs: true
+                                 routing_specs: false,
+                                 controller_specs: false,
+                                 request_specs: false
       end
     end
   end

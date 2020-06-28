@@ -6,5 +6,10 @@ module Cap::Table
     field :amount, type: BigDecimal
     field :willing_to_reinvest, type: Boolean
     field :negotiation_state, type: String
+
+    validates :name, presence: true,
+                      uniqueness: true
+    validates :amount, presence: true,
+                       numericality: true
   end
 end

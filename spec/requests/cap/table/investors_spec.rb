@@ -14,6 +14,13 @@
 
 module Cap::Table
   RSpec.describe "/investors", type: :request do
+
+    include Engine.routes.url_helpers
+
+    before do
+      @routes = Engine.routes
+    end
+
     # Investor. As you add validations to Investor, be sure to
     # adjust the attributes here as well.
     let(:valid_attributes) {

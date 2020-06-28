@@ -33,4 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'slim'
   spec.add_dependency "mongoid-multitenancy-2"
   spec.add_development_dependency 'rspec-rails', '~> 4.0.1'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'pry-nav'
+  spec.add_development_dependency 'mongoid-rspec'
 end

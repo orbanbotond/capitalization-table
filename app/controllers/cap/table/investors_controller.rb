@@ -6,7 +6,7 @@ module Cap::Table
 
     # GET /investors
     def index
-      @investors = Investor.all
+      @investors = ::Cap::Table::Investor.all
     end
 
     # GET /investors/1
@@ -15,7 +15,7 @@ module Cap::Table
 
     # GET /investors/new
     def new
-      @investor = Investor.new
+      @investor = ::Cap::Table::Investor.new
     end
 
     # GET /investors/1/edit
@@ -24,7 +24,7 @@ module Cap::Table
 
     # POST /investors
     def create
-      @investor = Investor.new(investor_params)
+      @investor = ::Cap::Table::Investor.new(investor_params)
 
       if @investor.save
         redirect_to @investor, notice: 'Investor was successfully created.'
@@ -51,7 +51,7 @@ module Cap::Table
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_investor
-        @investor = Investor.find(params[:id])
+        @investor = ::Cap::Table::Investor.find(params[:id])
       end
 
       # Only allow a trusted parameter "white list" through.
