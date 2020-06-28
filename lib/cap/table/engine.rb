@@ -2,6 +2,7 @@ require 'bootstrap'
 require 'aasm'
 require 'slim'
 require 'simple_form'
+require 'webpacker'
 
 module Cap
   module Table

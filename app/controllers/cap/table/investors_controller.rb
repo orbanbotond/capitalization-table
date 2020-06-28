@@ -2,7 +2,7 @@ require_dependency "cap/table/application_controller"
 
 module Cap::Table
   class InvestorsController < ApplicationController
-    before_action :set_investor, only: [:show, :edit, :update, :destroy]
+    before_action :set_investor, only: [:show, :edit, :update, :destroy, :negotiate, :invest, :re_invest]
 
     # GET /investors
     def index
@@ -21,6 +21,26 @@ module Cap::Table
     # GET /investors/1/edit
     def edit
     end
+
+    def negotiate
+      @investor.negotiate!
+
+      redirect_to investors_path, notice: 'Investor was put in negotiation state.'
+    end
+
+    def invest
+      @investor.invest!
+
+      redirect_to investors_path, notice: 'Investor was put in invest state.'
+    end
+
+    def re_invest
+      @investor.reinvest!
+
+      redirect_to investors_path, notice: 'Investor was put in re_invest state.'
+    end
+
+
 
     # POST /investors
     def create

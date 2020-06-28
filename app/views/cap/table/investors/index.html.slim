@@ -2,7 +2,7 @@ p#notice
   = notice
 h1
   | Investors
-table.table.table-striped
+table.table.table-striped.table-hover
   thead
     tr
       th
@@ -31,5 +31,7 @@ table.table.table-striped
           = link_to 'Edit', edit_investor_path(investor)
         td
           = link_to 'Destroy', investor, method: :delete, data: { confirm: 'Are you sure?' }
+        td
+          = state_transition_links investor
 br
 = link_to 'New Investor', new_investor_path
