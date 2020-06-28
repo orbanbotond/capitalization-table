@@ -110,7 +110,7 @@ module Cap::Table
     describe "PUT #update" do
       context "with valid params" do
         let(:new_attributes) {
-          skip("Add a hash of attributes valid for your model")
+          valid_attributes
         }
 
         it "updates the requested investor" do
@@ -150,6 +150,5 @@ module Cap::Table
         expect(response).to redirect_to(investors_url)
       end
     end
-
   end
 end

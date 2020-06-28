@@ -95,8 +95,26 @@ RSpec.configure do |config|
 =end
 end
 
+require 'rails/mongoid'
 require 'mongoid-rspec'
 
 RSpec.configure do |config|
   config.include Mongoid::Matchers
+end
+
+require 'database_cleaner-mongoid'
+require 'database_cleaner'
+
+RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
 end

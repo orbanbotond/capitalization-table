@@ -24,11 +24,18 @@ module Cap::Table
     # Investor. As you add validations to Investor, be sure to
     # adjust the attributes here as well.
     let(:valid_attributes) {
-      skip("Add a hash of attributes valid for your model")
+      {
+          name: "Logic Optimum",
+          amount: "10000000",
+          willing_to_reinvest: true
+      }
     }
 
     let(:invalid_attributes) {
-      skip("Add a hash of attributes invalid for your model")
+      {
+          name: nil,
+          amount: "10000000"
+      }
     }
 
     describe "GET /index" do
