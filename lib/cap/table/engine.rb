@@ -3,6 +3,8 @@ require 'aasm'
 require 'slim'
 require 'simple_form'
 require 'webpacker'
+require 'mongoid-multitenancy'
+require 'devise'
 
 module Cap
   module Table

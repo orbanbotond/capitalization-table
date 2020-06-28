@@ -2,6 +2,7 @@ require_dependency "cap/table/application_controller"
 
 module Cap::Table
   class InvestorsController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_investor, only: [:show, :edit, :update, :destroy, :negotiate, :invest, :re_invest]
 
     # GET /investors

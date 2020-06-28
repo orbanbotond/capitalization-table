@@ -25,10 +25,14 @@ require 'rails_helper'
 
 module Cap::Table
   RSpec.describe InvestorsController, type: :controller do
-    # include Engine.routes.url_helpers
-
     before do
       @routes = Engine.routes
+    end
+
+    before(:each) do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      user = User.create email: 'bo@gmail.com', password: 'dummypwd123', password_confirmation: 'dummypwd123'
+      sign_in user
     end
 
     # This should return the minimal set of attributes required to create a valid
@@ -52,7 +56,7 @@ module Cap::Table
     # This should return the minimal set of values that should be in the session
     # in order to pass any filters (e.g. authentication) defined in
     # InvestorsController. Be sure to keep this updated too.
-    let(:valid_session) { {} }
+    let(:valid_session) { {"warden.user.user.key" => session["warden.user.user.key"]} }
 
     describe "GET #index" do
       it "returns a success response" do
