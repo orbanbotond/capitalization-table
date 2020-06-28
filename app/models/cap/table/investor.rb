@@ -1,5 +1,3 @@
-require 'aasm'
-
 module Cap::Table
   class Investor
     include Mongoid::Document

@@ -1,3 +1,6 @@
+require 'bootstrap'
+require 'aasm'
+
 module Cap
   module Table
     class Engine < ::Rails::Engine
