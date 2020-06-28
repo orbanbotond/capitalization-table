@@ -1,24 +1,7 @@
-= form_with(model: investor, local: true) do |form|
-  - if investor.errors.any?
-    #error_explanation
-      h2
-        = pluralize(investor.errors.count, "error")
-        |  prohibited this investor from being saved:
-      ul
-        - investor.errors.full_messages.each do |message|
-          li
-            = message
-  .field
-    = form.label :name
-    = form.text_field :name
-  .field
-    = form.label :amount
-    = form.text_field :amount
-  .field
-    = form.label :willing_to_reinvest
-    = form.text_field :willing_to_reinvest
-  .field
-    = form.label :negotiation_state
-    = form.text_field :negotiation_state
-  .actions
-    = form.submit
+= simple_form_for(investor, wrapper: :horizontal_form) do |form|
+  = form.error_notification
+  = form.input :name
+  = form.input :amount, as: :integer
+  = form.input :willing_to_reinvest, as: :boolean
+  = form.input :negotiation_state, disabled: true
+  = form.button :submit, class: "btn-primary"

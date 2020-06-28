@@ -1,6 +1,7 @@
 require 'bootstrap'
 require 'aasm'
 require 'slim'
+require 'simple_form'
 
 module Cap
   module Table
