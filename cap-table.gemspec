@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bootstrap', '~> 4.5.0'
   spec.add_dependency 'slim'
   spec.add_dependency "mongoid-multitenancy-2"
+  spec.add_dependency "aasm"
   spec.add_development_dependency 'rspec-rails', '~> 4.0.1'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'pry-nav'
